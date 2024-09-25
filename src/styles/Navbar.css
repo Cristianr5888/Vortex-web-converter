@@ -1,0 +1,92 @@
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3c0540;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+.logo-container {
+  flex: 0 0 auto;
+}
+
+.logo {
+  height: 40px;
+}
+
+.banner-text {
+  margin-left: 18px;
+}
+
+.banner-links {
+  margin-left: auto;
+  display: flex;
+  margin-right: 40px;
+  gap: 10px;
+}
+
+.banner-links a {
+  text-decoration: none;
+  color: white;
+
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1.1rem;
+  transition: opacity 0.3s;
+}
+.banner-links a:hover {
+  text-decoration: underline;
+  color: rgb(73, 199, 240);
+}
+/* Icono de menú hamburguesa */
+.menu-icon {
+  display: none;
+  font-size: 2.1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .banner-links {
+    position: absolute;
+    top: 85px; /* ajusta según el tamaño de la navbar */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: rgb(211, 224, 236);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s, opacity 0.4s;
+  }
+
+  .banner-links a {
+    margin: 10px 0;
+    text-align: center;
+    color: black;
+    padding-right: 20px;
+  }
+
+  .menu-icon {
+    display: block;
+    margin-left: auto;
+    margin-right: 50px;
+  }
+
+  .banner-links.show {
+    opacity: 1;
+    max-height: 200px; /* Ajusta según el número de enlaces */
+  }
+}
+
+.span-navb {
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+}
+.span-navb:hover {
+  text-decoration: underline;
+  color: gray;
+}

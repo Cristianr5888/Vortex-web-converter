@@ -1,0 +1,32 @@
+.banner-principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Pantallas pequeñas: 100% del ancho */
+  margin: 0 auto;
+  gap: 12px;
+  background-color: rgb(136, 209, 235);
+  /* padding-bottom: 50px; */
+  margin-bottom: 16px;
+  height: auto;
+  margin-top: 80px;
+  border: 1px solid rgb(100, 220, 208);
+  border-radius: 5px;
+  padding: 35px 0;
+}
+.banner-interno p {
+  font-size: 19px;
+  color: #161515;
+
+  text-align: left;
+}
+.banner-interno {
+  width: 70%; /* Contenedor interno ocupa el 70% del contenedor padre */
+  margin: 0 auto; /* Centrar el contenedor interno */
+  text-align: right; /* Alinear el texto a la derecha */
+}
+@media (min-width: 1024px) {
+  .banner-principal {
+    width: 76%; /* Pantallas grandes: 70% del ancho */
+  }
+}

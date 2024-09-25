@@ -1,23 +1,26 @@
 import { useState } from "react";
+import "../styles/Convert.css";
+import animation from "../assets/vortex_logo.webp";
 
-const ImageConverter = () => {
+const Converter = () => {
   const [images, setImages] = useState([]);
   const [convertedImages, setConvertedImages] = useState([]);
-  const [selectedFiles, setSelectedFiles] = useState(null); // Nueva variable de estado
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [isConverting, setIsConverting] = useState(false); // Nuevo estado para controlar la animación
 
-  // Función para manejar la selección de imágenes
   const handleImageUpload = (event) => {
     const files = event.target.files;
     const imagesArray = Array.from(files).map((file) => ({
-      name: file.name.split(".")[0], // Guardamos solo el nombre sin la extensión
+      name: file.name.split(".")[0],
       file: file,
     }));
-    setImages(imagesArray); // Guardamos los archivos seleccionados
-    setSelectedFiles(files); // Guardamos los archivos seleccionados para el botón personalizado
+    setImages(imagesArray);
+    setSelectedFiles(files);
   };
 
-  // Función para convertir las imágenes a .webp
   const convertToWebp = async () => {
+    if (images.length === 0) return;
+    setIsConverting(true); // Iniciar la animación
     const webpImages = [];
     for (const imageObj of images) {
       const reader = new FileReader();
@@ -34,24 +37,24 @@ const ImageConverter = () => {
           canvas.height = img.height;
 
           ctx.drawImage(img, 0, 0);
-          const webpImage = canvas.toDataURL("image/webp", 0.8); // Convertir a .webp
+          const webpImage = canvas.toDataURL("image/webp", 0.8);
 
           webpImages.push({
-            name: imageObj.name, // Usamos el nombre original
+            name: imageObj.name,
             webpData: webpImage,
           });
 
           if (webpImages.length === images.length) {
-            setConvertedImages(webpImages); // Guardar las imágenes convertidas
+            setConvertedImages(webpImages);
+            setIsConverting(false); // Detener la animación
           }
         };
       };
 
-      reader.readAsDataURL(imageObj.file); // Leer la imagen como Data URL
+      reader.readAsDataURL(imageObj.file);
     }
   };
 
-  // Función para guardar el archivo usando la API de File System Access
   const saveFile = async (image) => {
     try {
       const fileHandle = await window.showSaveFilePicker({
@@ -75,77 +78,59 @@ const ImageConverter = () => {
     }
   };
 
-  return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>CR VORTEX</h1>
-      <h2 style={{ textAlign: "center" }}>Convertir Imágenes a WebP</h2>
+  // let loadingClass = "loading-image";
+  // if (isConverting) {
+  //   loadingClass += " rotating"; // Añade la clase de rotación si está convirtiendo
+  // }
 
-      {/* Input de archivo oculto */}
+  return (
+    <div className="contenedor-principal">
+      <h1 className="titulo">Convertir Imágenes a .WebP</h1>
+
       <input
         id="fileInput"
         type="file"
         multiple
         accept="image/jpeg, image/png"
-        style={{ display: "none" }} // Ocultamos el input original
+        className="input-archivo"
         onChange={handleImageUpload}
       />
 
-      {/* Botón personalizado para subir archivos */}
-      <label
-        htmlFor="fileInput"
-        style={{
-          marginLeft: "40%",
-          padding: "10px",
-          backgroundColor: "gray",
-          borderRadius: "8px",
-          cursor: "pointer",
-          color: "white",
-          fontFamily: "Verdana",
-          fontWeight: "500",
-        }}
-      >
-        {selectedFiles
+      <label htmlFor="fileInput" className="boton-archivo">
+        {selectedFiles && selectedFiles.length === 1
+          ? "1 archivo seleccionado"
+          : selectedFiles && selectedFiles.length > 1
           ? `${selectedFiles.length} archivos seleccionados`
           : "Elegir archivos"}
       </label>
 
       <button
-        style={{
-          marginLeft: "40%",
-          marginTop: "16px",
-          padding: "10px",
-          borderRadius: "8px",
-          color: "white",
-          backgroundColor: "green",
-          fontFamily: "verdana",
-          fontSize: "18px",
-        }}
+        className="boton-convertir"
         onClick={convertToWebp}
         disabled={images.length === 0}
       >
         Convertir a WebP
       </button>
 
-      <div style={{ alignItems: "center", marginLeft: "40%" }}>
-        {convertedImages.length > 0 && <h3>Imágenes Convertidas:</h3>}
+      <div className="loading-container">
+        <img
+          src={animation} // Asegúrate de tener el path correcto a tu imagen
+          alt="loading"
+          className={`loading-image ${isConverting ? "rotating" : ""}`}
+          // Mostrar solo cuando esté convirtiendo o ya haya imágenes convertidas
+        />
+      </div>
+
+      <div className="contenedor-imagenes">
+        {convertedImages.length > 0}
         {convertedImages.map((image, index) => (
           <div key={index}>
             <img
               src={image.webpData}
               alt={`converted-${index}`}
-              style={{ width: "200px" }}
+              className="imagen-convertida"
             />
-            <button
-              style={{
-                padding: "8px",
-                borderRadius: "8px",
-                backgroundColor: "yellow",
-                margin: "5px",
-                fontFamily: "Verdana",
-                fontWeight: "500",
-              }}
-              onClick={() => saveFile(image)}
-            >
+            <button className="boton-guardar" onClick={() => saveFile(image)}>
               Guardar imagen
             </button>
           </div>
@@ -155,4 +140,4 @@ const ImageConverter = () => {
   );
 };
 
-export default ImageConverter;
+export default Converter;

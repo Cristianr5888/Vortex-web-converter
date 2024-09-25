@@ -1,0 +1,158 @@
+/* Contenedor principal con los elementos alineados verticalmente */
+.contenedor-principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 92%;
+  margin: 0 auto;
+  gap: 16px;
+  background-color: rgb(211, 224, 236);
+  padding-bottom: 50px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid rgb(162, 162, 162);
+}
+.contenedor-imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 80%;
+  margin: 0 auto;
+}
+.contenedor-imagenes h3 {
+  padding-bottom: 14px;
+}
+.imagen-convertida {
+  flex: 1 0 21%; /* Ajusta el tamaño de los elementos, puede ser 21% para 4 elementos por fila */
+  margin: 5px; /* Espacio entre las imágenes */
+  text-align: center; /* Centra el texto dentro de cada imagen */
+  display: flex; /* Usar flexbox para alinear el contenido interno */
+  justify-content: center; /* Centrar horizontalmente el contenido */
+  align-items: center; /* Centrar verticalmente el contenido */
+  height: 150px; /* Ajusta la altura según tus necesidades */
+  width: 150px;
+}
+.titulo {
+  padding-top: 16px;
+}
+
+.input-archivo {
+  display: none;
+}
+
+/* Estilo del botón para seleccionar archivos */
+.boton-archivo {
+  padding: 10px;
+  background-color: rgb(22, 157, 214);
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  font-family: Verdana, sans-serif;
+  font-weight: 500;
+  width: auto;
+  border: 2px solid rgb(4, 60, 123);
+}
+
+/* Estilos del botón para convertir las imágenes */
+.boton-convertir {
+  margin-top: 16px;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  background-color: green;
+  font-family: Verdana, sans-serif;
+  font-size: 18px;
+  width: auto;
+  cursor: pointer;
+}
+.boton-convertir:hover {
+  background-color: #0fab0f;
+}
+.boton-archivo:hover {
+  background-color: #0e67bb;
+}
+.boton-guardar:hover {
+  background-color: #0e67bb;
+}
+.boton-guardar {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgb(22, 157, 214);
+  margin: 0 auto;
+  font-family: Verdana, sans-serif;
+  font-weight: 500;
+  width: auto;
+  color: white; /* Evita que el botón abarque el 100% del ancho */
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-image {
+  width: 120px;
+  height: 120px;
+}
+.rotating {
+  animation: rotate 2s linear infinite; /* Define la animación de rotación */
+}
+
+@media (min-width: 1024px) {
+  .contenedor-principal {
+    width: 76%;
+  }
+  .titulo {
+    font-size: 30px;
+  }
+}
+/* @media (max-width: 724px) {
+  .titulo {
+    font-size: 20px;
+  }
+  
+} */
+@media (max-width: 1024px) {
+  .imagen-convertida {
+    flex: 1 0 30%; /* 3 elementos por fila en pantallas medianas */
+    height: 120px;
+    width: 120px;
+  }
+}
+
+@media (max-width: 724px) {
+  .imagen-convertida {
+    flex: 1 0 45%; /* 2 elementos por fila en pantallas pequeñas */
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .imagen-convertida {
+    flex: 1 0 98%; /* 1 elemento por fila en pantallas muy pequeñas */
+    height: 80px;
+    width: 80px;
+  }
+  .boton-guardar {
+    font-size: 0.5rem;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
