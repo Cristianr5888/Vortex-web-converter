@@ -49,7 +49,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 913px) {
   .banner-links {
     position: absolute;
     top: 85px; /* ajusta según el tamaño de la navbar */
@@ -69,6 +69,9 @@
     color: black;
     padding-right: 20px;
   }
+  .banner-links a:hover {
+    color: rgb(66, 65, 65);
+  }
 
   .menu-icon {
     display: block;
@@ -78,15 +81,23 @@
 
   .banner-links.show {
     opacity: 1;
-    max-height: 200px; /* Ajusta según el número de enlaces */
+    max-height: 250px; /* Ajusta según el número de enlaces */
+  }
+  .span-navb {
+    color: rgb(40, 40, 40) !important;
+    font-size: 1rem;
+  }
+  .link-n {
+    display: block;
   }
 }
 
 .span-navb {
-  color: rgb(255, 255, 255);
+  color: white;
   font-size: 1rem;
 }
 .span-navb:hover {
   text-decoration: underline;
-  color: gray;
+  color: rgb(73, 199, 240);
+  cursor: pointer;
 }

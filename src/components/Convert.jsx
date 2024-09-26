@@ -1,12 +1,16 @@
+import JSZip from "jszip";
 import { useState } from "react";
-import "../styles/Convert.css";
+import { useTranslation } from "react-i18next";
+
+import { saveAs } from "file-saver";
 import animation from "../assets/vortex_logo.webp";
 
 const Converter = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState([]);
   const [convertedImages, setConvertedImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [isConverting, setIsConverting] = useState(false); // Nuevo estado para controlar la animación
+  const [isConverting, setIsConverting] = useState(false);
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -20,7 +24,7 @@ const Converter = () => {
 
   const convertToWebp = async () => {
     if (images.length === 0) return;
-    setIsConverting(true); // Iniciar la animación
+    setIsConverting(true);
     const webpImages = [];
     for (const imageObj of images) {
       const reader = new FileReader();
@@ -46,7 +50,7 @@ const Converter = () => {
 
           if (webpImages.length === images.length) {
             setConvertedImages(webpImages);
-            setIsConverting(false); // Detener la animación
+            setIsConverting(false);
           }
         };
       };
@@ -78,65 +82,77 @@ const Converter = () => {
     }
   };
 
-  // let loadingClass = "loading-image";
-  // if (isConverting) {
-  //   loadingClass += " rotating"; // Añade la clase de rotación si está convirtiendo
-  // }
+  const downloadAllAsZip = async () => {
+    const zip = new JSZip();
+    for (const image of convertedImages) {
+      const response = await fetch(image.webpData);
+      const blob = await response.blob();
+      zip.file(`${image.name}.webp`, blob);
+    }
+    const content = await zip.generateAsync({ type: "blob" });
+    saveAs(content, "converted_images.zip");
+  };
 
   return (
-    <div className="contenedor-principal">
-      <h1 className="titulo">Convertir Imágenes a .WebP</h1>
+    <>
+      <div className="contenedor-principal">
+        <h1 className="titulo">{t("title_h")}</h1>
 
-      <input
-        id="fileInput"
-        type="file"
-        multiple
-        accept="image/jpeg, image/png"
-        className="input-archivo"
-        onChange={handleImageUpload}
-      />
-
-      <label htmlFor="fileInput" className="boton-archivo">
-        {selectedFiles && selectedFiles.length === 1
-          ? "1 archivo seleccionado"
-          : selectedFiles && selectedFiles.length > 1
-          ? `${selectedFiles.length} archivos seleccionados`
-          : "Elegir archivos"}
-      </label>
-
-      <button
-        className="boton-convertir"
-        onClick={convertToWebp}
-        disabled={images.length === 0}
-      >
-        Convertir a WebP
-      </button>
-
-      <div className="loading-container">
-        <img
-          src={animation} // Asegúrate de tener el path correcto a tu imagen
-          alt="loading"
-          className={`loading-image ${isConverting ? "rotating" : ""}`}
-          // Mostrar solo cuando esté convirtiendo o ya haya imágenes convertidas
+        <input
+          id="fileInput"
+          type="file"
+          multiple
+          accept="image/jpeg, image/png"
+          className="input-archivo"
+          onChange={handleImageUpload}
         />
-      </div>
 
-      <div className="contenedor-imagenes">
-        {convertedImages.length > 0}
-        {convertedImages.map((image, index) => (
-          <div key={index}>
-            <img
-              src={image.webpData}
-              alt={`converted-${index}`}
-              className="imagen-convertida"
-            />
-            <button className="boton-guardar" onClick={() => saveFile(image)}>
-              Guardar imagen
-            </button>
-          </div>
-        ))}
+        <label htmlFor="fileInput" className="boton-archivo">
+          {selectedFiles && selectedFiles.length === 1
+            ? t("one_file")
+            : selectedFiles && selectedFiles.length > 1
+            ? `${selectedFiles.length}` + " " + t("more_files")
+            : t("sel_files")}
+        </label>
+
+        <button
+          className="boton-convertir"
+          onClick={convertToWebp}
+          disabled={images.length === 0}
+        >
+          {t("conv_files")}
+        </button>
+
+        <div className="loading-container">
+          <img
+            src={animation} // Asegúrate de tener el path correcto a tu imagen
+            alt="loading"
+            className={`loading-image ${isConverting ? "rotating" : ""}`}
+            // Mostrar solo cuando esté convirtiendo o ya haya imágenes convertidas
+          />
+        </div>
+        {convertedImages.length > 1 && (
+          <button className="boton-zip" onClick={downloadAllAsZip}>
+            Descarga todo como ZIP
+          </button>
+        )}
+        <div className="contenedor-imagenes">
+          {convertedImages.length > 0}
+          {convertedImages.map((image, index) => (
+            <div key={index}>
+              <img
+                src={image.webpData}
+                alt={`converted-${index}`}
+                className="imagen-convertida"
+              />
+              <button className="boton-guardar" onClick={() => saveFile(image)}>
+                {t("save_files")}
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

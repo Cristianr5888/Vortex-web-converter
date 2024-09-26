@@ -1,23 +1,23 @@
 import "./App.css";
 import "./index.css";
-import Converter from "./components/Convert.jsx";
+import Home from "./home.jsx";
+
 import Navbar from "./components/Navbar.jsx";
 import CopyR from "./components/Footer.jsx";
-import Banner from "./components/Banner.jsx";
+
+import About from "./about.jsx";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
-    <div className="wrapper">
+    <Router>
       <Navbar />
 
-      <div className="main">
-        <Banner />
-        <section>
-          <Converter />
-        </section>
-      </div>
-
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
       <CopyR />
-    </div>
+    </Router>
   );
 }
 

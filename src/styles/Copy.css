@@ -2,7 +2,7 @@
   width: 100%;
   /* Limita el ancho máximo en pantallas grandes */
   height: 90px;
-  background-color: #220425;
+  background-color: #28042c;
   display: flex;
   justify-content: space-between; /* Alinea los elementos en los extremos */
   align-items: center;
@@ -32,6 +32,14 @@ p {
   width: 22px;
   height: 22px;
   margin-top: 12px;
+}
+@media (min-width: 1400px) {
+  .bar {
+    height: 125px;
+  }
+  p {
+    font-size: 1rem;
+  }
 }
 @media (min-width: 769px) {
   .img_copy {

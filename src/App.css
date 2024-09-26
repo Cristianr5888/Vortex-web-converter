@@ -6,12 +6,3 @@ body,
 html {
   margin: 0;
 }
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos el 100% de la altura de la ventana */
-}
-
-.main {
-  flex: 1; /* Permite que el contenedor principal ocupe el espacio disponible */
-}

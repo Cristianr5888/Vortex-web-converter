@@ -4,21 +4,26 @@
   align-items: center;
   width: 100%; /* Pantallas pequeñas: 100% del ancho */
   margin: 0 auto;
-  gap: 12px;
-  background-color: rgb(136, 209, 235);
+  /* gap: 12px; */
+  /* background-color: rgb(136, 209, 235); */
   /* padding-bottom: 50px; */
+  background-image: url("../assets/space_background.jpeg");
+  background-size: cover;
+  background-position: center;
   margin-bottom: 16px;
   height: auto;
-  margin-top: 80px;
+  margin-top: 100px;
   border: 1px solid rgb(100, 220, 208);
   border-radius: 5px;
-  padding: 35px 0;
+  padding: 60px 0;
 }
 .banner-interno p {
-  font-size: 19px;
-  color: #161515;
+  font-size: 17px;
+  color: #ffffff;
 
   text-align: left;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 .banner-interno {
   width: 70%; /* Contenedor interno ocupa el 70% del contenedor padre */
@@ -28,5 +33,22 @@
 @media (min-width: 1024px) {
   .banner-principal {
     width: 76%; /* Pantallas grandes: 70% del ancho */
+  }
+  .banner-interno p {
+    font-size: 21px;
+  }
+}
+@media (min-width: 1400px) {
+  .banner-principal {
+    padding: 80px 0;
+  }
+  .banner-interno p {
+    font-size: 23px;
+  }
+}
+@media (max-width: 734px) {
+  .banner-principal {
+    margin-top: 60px;
+    padding-top: 60px;
   }
 }

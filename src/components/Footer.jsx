@@ -4,9 +4,9 @@ function CopyR() {
   return (
     <div>
       <div className="bar">
-        <p>Copyright © 2024 </p>
+        <p>Programmed by Cristian J. 2024</p>
         <div className="s">
-          <p>Programmed by CRVANCED</p>
+          <p>CRVANCED</p>
           <img className="img_copy" src={crvancedd} alt="" />
         </div>
       </div>
