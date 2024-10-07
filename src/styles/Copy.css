@@ -29,8 +29,8 @@ p {
 }
 
 .img_copy {
-  width: 22px;
-  height: 22px;
+  width: 150px;
+  height: auto;
   margin-top: 12px;
 }
 @media (min-width: 1400px) {
@@ -66,5 +66,6 @@ p {
   }
   .img_copy {
     display: inline-block;
+    width: 120px;
   }
 }
