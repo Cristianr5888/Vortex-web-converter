@@ -1,5 +1,5 @@
 import "../styles/Copy.css";
-import crvancedd from "../assets/weight-w-logo.png";
+import crvancedd from "../assets/novam_w.png";
 function CopyR() {
   return (
     <div>

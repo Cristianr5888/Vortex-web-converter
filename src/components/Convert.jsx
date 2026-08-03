@@ -1,9 +1,17 @@
 import JSZip from "jszip";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { saveAs } from "file-saver";
-import animation from "../assets/vortex_logo.webp";
+import animation from "../assets/vortex_fb-removebg-preview.png";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 const Converter = () => {
   const { t } = useTranslation();
@@ -25,6 +33,7 @@ const Converter = () => {
   const convertToWebp = async () => {
     if (images.length === 0) return;
     setIsConverting(true);
+
     const webpImages = [];
     for (const imageObj of images) {
       const reader = new FileReader();
@@ -93,66 +102,94 @@ const Converter = () => {
     saveAs(content, "converted_images.zip");
   };
 
+  const selectedLabel =
+    selectedFiles && selectedFiles.length
+      ? selectedFiles.length === 1
+        ? t("one_file")
+        : `${selectedFiles.length} ${t("more_files")}`
+      : t("sel_files");
+
   return (
-    <>
-      <div className="contenedor-principal">
-        <h1 className="titulo">{t("title_h")}</h1>
+    <Box className="contenedor-principal" component="main">
+      <Paper className="converter-card" elevation={8}>
+        <Stack spacing={3} alignItems="center">
+          <Typography variant="h2" className="titulo">
+            {t("title_h")}
+          </Typography>
+          <Typography className="subtitle" variant="body1" textAlign="center">
+            {t("banner_h")}
+          </Typography>
 
-        <input
-          id="fileInput"
-          type="file"
-          multiple
-          accept="image/jpeg, image/png"
-          className="input-archivo"
-          onChange={handleImageUpload}
-        />
+          <Box className="file-group">
+            <input
+              id="fileInput"
+              type="file"
+              multiple
+              accept="image/jpeg, image/png"
+              className="input-archivo"
+              onChange={handleImageUpload}
+            />
+            <label htmlFor="fileInput" className="boton-archivo">
+              {selectedLabel}
+            </label>
+          </Box>
 
-        <label htmlFor="fileInput" className="boton-archivo">
-          {selectedFiles && selectedFiles.length === 1
-            ? t("one_file")
-            : selectedFiles && selectedFiles.length > 1
-            ? `${selectedFiles.length}` + " " + t("more_files")
-            : t("sel_files")}
-        </label>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            alignItems="center"
+          >
+            <Button
+              className="boton-convertir"
+              variant="contained"
+              onClick={convertToWebp}
+              disabled={images.length === 0 || isConverting}
+            >
+              {t("conv_files")}
+            </Button>
+            {convertedImages.length > 1 && (
+              <Button
+                className="boton-zip"
+                variant="outlined"
+                onClick={downloadAllAsZip}
+              >
+                Descarga todo como ZIP
+              </Button>
+            )}
+          </Stack>
 
-        <button
-          className="boton-convertir"
-          onClick={convertToWebp}
-          disabled={images.length === 0}
-        >
-          {t("conv_files")}
-        </button>
+          <Box className="loading-container">
+            {isConverting && (
+              <Stack direction="row" spacing={2} alignItems="center">
+                <CircularProgress color="secondary" />
+                <Typography>Convirtiendo imágenes...</Typography>
+              </Stack>
+            )}
+          </Box>
+        </Stack>
+      </Paper>
 
-        <div className="loading-container">
-          <img
-            src={animation} // Asegúrate de tener el path correcto a tu imagen
-            alt="loading"
-            className={`loading-image ${isConverting ? "rotating" : ""}`}
-            // Mostrar solo cuando esté convirtiendo o ya haya imágenes convertidas
-          />
-        </div>
-        {convertedImages.length > 1 && (
-          <button className="boton-zip" onClick={downloadAllAsZip}>
-            Descarga todo como ZIP
-          </button>
-        )}
-        <div className="contenedor-imagenes">
-          {convertedImages.length > 0}
-          {convertedImages.map((image, index) => (
-            <div key={index}>
+      <Grid container spacing={3} className="contenedor-imagenes">
+        {convertedImages.map((image, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+            <Paper className="converted-card" elevation={6}>
               <img
                 src={image.webpData}
                 alt={`converted-${index}`}
                 className="imagen-convertida"
               />
-              <button className="boton-guardar" onClick={() => saveFile(image)}>
+              <Button
+                className="boton-guardar"
+                variant="contained"
+                onClick={() => saveFile(image)}
+              >
                 {t("save_files")}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
+              </Button>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

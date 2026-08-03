@@ -1,183 +1,149 @@
-/* Contenedor principal con los elementos alineados verticalmente */
 .contenedor-principal {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 92%;
-  margin: 0 auto;
-  gap: 16px;
-  background-color: rgb(211, 224, 236);
-  padding-bottom: 50px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  border: 1px solid rgb(162, 162, 162);
+  width: min(100%, 1160px);
+  margin: 0 auto 36px;
+  padding: 24px 16px 36px;
 }
-.contenedor-imagenes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 80%;
-  margin: 0 auto;
+
+.converter-card {
+  width: 100%;
+  max-width: 1032px;
+  padding: 36px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(174, 142, 255, 0.35);
+  box-shadow: var(--shadow);
 }
-.contenedor-imagenes h3 {
-  padding-bottom: 14px;
-}
-.imagen-convertida {
-  flex: 1 0 21%; /* Ajusta el tamaño de los elementos, puede ser 21% para 4 elementos por fila */
-  margin: 5px; /* Espacio entre las imágenes */
-  text-align: center; /* Centra el texto dentro de cada imagen */
-  display: flex; /* Usar flexbox para alinear el contenido interno */
-  justify-content: center; /* Centrar horizontalmente el contenido */
-  align-items: center; /* Centrar verticalmente el contenido */
-  height: 150px; /* Ajusta la altura según tus necesidades */
-  width: 150px;
-}
+
 .titulo {
-  padding-top: 16px;
+  margin: 0;
+  font-size: clamp(2rem, 2.5vw, 3.4rem);
+  color: #38205f;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.subtitle {
+  max-width: 760px;
+  color: #5d4b8a;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.file-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .input-archivo {
   display: none;
 }
 
-/* Estilo del botón para seleccionar archivos */
 .boton-archivo {
-  padding: 10px;
-  background-color: rgb(22, 157, 214);
-  border-radius: 8px;
+  border-radius: 999px;
+  padding: 0.95rem 1.55rem;
+  border: 1px solid rgba(174, 142, 255, 0.35);
+  color: #3c1f6d;
+  font-weight: 600;
+  background: rgba(245, 238, 255, 0.92);
   cursor: pointer;
-  color: white;
-  font-size: 18px;
-  font-family: Verdana, sans-serif;
-  font-weight: 500;
-  width: auto;
-  border: 2px solid rgb(4, 60, 123);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-/* Estilos del botón para convertir las imágenes */
-.boton-convertir {
-  margin-top: 16px;
-  padding: 10px;
-  border-radius: 8px;
-  color: white;
-  background-color: green;
-  font-family: Verdana, sans-serif;
-  font-size: 18px;
-  width: auto;
-  cursor: pointer;
-  border: 2px solid rgb(0, 71, 0);
-}
-.boton-zip {
-  margin-top: 16px;
-  padding: 10px;
-  border-radius: 8px;
-  color: white;
-  background-color: green;
-  font-family: Verdana, sans-serif;
-  font-size: 14px;
-  width: auto;
-  cursor: pointer;
-  border: 2px solid rgb(0, 71, 0);
-}
-.boton-guardar {
-  padding: 10px;
-  border-radius: 8px;
-  background-color: green;
-  margin: 0 auto;
-  font-family: Verdana, sans-serif;
-  font-weight: 500;
-  width: auto;
-  color: white; /* Evita que el botón abarque el 100% del ancho */
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  font-size: 12px;
-}
-.boton-zip:hover {
-  background-color: #0fab0f;
-}
-.boton-convertir:hover {
-  background-color: #0fab0f;
-}
 .boton-archivo:hover {
-  background-color: #0e67bb;
+  transform: translateY(-1px);
+  background: rgba(234, 223, 255, 0.98);
 }
+
+.boton-convertir,
+.boton-zip,
+.boton-guardar {
+  border-radius: 999px;
+  text-transform: none;
+  padding: 0.95rem 1.5rem;
+  font-weight: 700;
+}
+
+.boton-convertir {
+  background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%);
+  color: #ffffff;
+}
+
+.boton-zip {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.boton-guardar {
+  width: 100%;
+  margin-top: 18px;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  color: #ffffff;
+}
+
+.boton-convertir:hover,
 .boton-guardar:hover {
-  background-color: #0fab0f;
+  opacity: 0.95;
 }
+
+.boton-zip:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 64px;
 }
 
-.loading-image {
-  width: 120px;
-  height: 120px;
-}
-.rotating {
-  animation: rotate 2s linear infinite; /* Define la animación de rotación */
+.contenedor-imagenes {
+  width: 100%;
+  margin-top: 18px;
 }
 
-@media (min-width: 1024px) {
-  .contenedor-principal {
-    width: 76%;
-  }
-  .titulo {
-    font-size: 30px;
-  }
+.converted-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  height: 100%;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(139, 92, 246, 0.14);
+  box-shadow: 0 18px 55px rgba(12, 5, 32, 0.18);
 }
-/* @media (max-width: 724px) {
-  .titulo {
-    font-size: 20px;
-  }
-  
-} */
+
+.imagen-convertida {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
 @media (max-width: 1024px) {
-  .imagen-convertida {
-    flex: 1 0 30%; /* 3 elementos por fila en pantallas medianas */
-    height: 120px;
-    width: 120px;
+  .converter-card {
+    padding: 28px;
   }
 }
 
-@media (max-width: 724px) {
-  .imagen-convertida {
-    flex: 1 0 45%; /* 2 elementos por fila en pantallas pequeñas */
-    height: 100px;
-    width: 100px;
+@media (max-width: 768px) {
+  .converter-card {
+    padding: 24px;
   }
   .boton-guardar {
-    display: none;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .imagen-convertida {
-    flex: 1 0 98%; /* 1 elemento por fila en pantallas muy pequeñas */
-    height: 80px;
-    width: 80px;
-  }
-
   .titulo {
-    font-size: 20px;
-  }
-}
-/* @media (max-width: 1025px) or (max-height: 1025px) {
-  .boton-guardar {
-    font-size: 0.5rem;
-    display: none;
-  }
-} */
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+    font-size: 2.1rem;
   }
 }
