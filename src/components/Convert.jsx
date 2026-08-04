@@ -2,7 +2,7 @@ import JSZip from "jszip";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { saveAs } from "file-saver";
-import animation from "../assets/vortex_fb-removebg-preview.png";
+import animation from "../assets/vortexLogoSE.png";
 import {
   Box,
   Button,
@@ -119,6 +119,9 @@ const Converter = () => {
           <Typography className="subtitle" variant="body1" textAlign="center">
             {t("banner_h")}
           </Typography>
+          <Typography className="subtitle" variant="body1" textAlign="center">
+            {t("banner_h2")}
+          </Typography>
 
           <Box className="file-group">
             <input
@@ -153,7 +156,7 @@ const Converter = () => {
                 variant="outlined"
                 onClick={downloadAllAsZip}
               >
-                Descarga todo como ZIP
+                {t("zip")}
               </Button>
             )}
           </Stack>
@@ -161,6 +164,11 @@ const Converter = () => {
           <Box className="loading-container">
             {isConverting && (
               <Stack direction="row" spacing={2} alignItems="center">
+                <img
+                  src={animation}
+                  alt="converting"
+                  className="loading-image rotating"
+                />
                 <CircularProgress color="secondary" />
                 <Typography>Convirtiendo imágenes...</Typography>
               </Stack>
@@ -169,7 +177,7 @@ const Converter = () => {
         </Stack>
       </Paper>
 
-      <Grid container spacing={3} className="contenedor-imagenes">
+      <Grid container spacing={3} className="contenedor-imagenes" sx={{ marginTop: "20px" }}>
         {convertedImages.map((image, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
             <Paper className="converted-card" elevation={6}>

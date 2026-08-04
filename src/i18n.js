@@ -18,12 +18,15 @@ const resources = {
       more_files: "archivos seleccionados",
       conv_files: "Convertir a WebP",
       save_files: "Guardar imagen",
+      zip: "Descargar como ZIP",
 
       banner_h:
         "Este conversor es completamente gratuito sin limitaciones de ningun\
             tipo, te permite convertir tus imagenes JPG o PNG a webp. Solo sube\
             tus imágenes, dale click a convertir, espera unos segundos y estarán\
-            listas.",
+            listas.\
+",
+      banner_h2: "NOTA: Si tienes problemas con el navegador Brave, descarga como zip los archivos convertidos o intenta usar otro navegador"
     },
   },
   en: {
@@ -40,11 +43,15 @@ const resources = {
       conv_files: "Convert to WebP",
       save_files: "Save file",
       title_h: "Convert images to .webP",
+      zip: "Download as ZIP",
       banner_h:
         "This converter is completely free with no limitations of any kind.\
        You can convert your JPG or PNG images to webP.\
-        Just upload your images,click convert, wait a few seconds, and they will be ready.",
-    },
+        Just upload your images, click convert, wait a few seconds, and they will be ready.",
+        banner_h2: "NOTE: If you have issues with the Brave browser, download the converted files as a zip or try using another browser"
+   
+    
+      },
   },
 };
 

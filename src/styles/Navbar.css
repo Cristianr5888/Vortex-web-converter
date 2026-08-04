@@ -23,7 +23,7 @@
   height: 58px;
   border-radius: 16px;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgb(255, 255, 255);
   padding: 8px;
   box-shadow: 0 12px 28px rgba(121, 76, 202, 0.12);
 }

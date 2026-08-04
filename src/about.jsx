@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import "./styles/about.css";
-import logo_a from "./assets/vortex_logo.webp";
+import vortexLogo from "./assets/vortexlogo.png";
 function About() {
   const { t } = useTranslation();
   return (
     <>
       <div className="banner-principal">
-        <h1 className="about-h1" style={{ color: "white" }}>
+        <h1 className="about-h1" style={{ color: "#a44CFF" }}>
           {t("about")}
         </h1>
       </div>
@@ -18,7 +18,7 @@ function About() {
             como herramienta para el desarrollo web.
           </p>
           <div className="logo-container_a">
-            <img src={logo_a} alt="vortex-logo" />
+            <img src={vortexLogo} alt="vortex-logo" />
           </div>
           <h1 className="titulo">¿Por qué un convertidor?</h1>
           <p className="pgraph-a">

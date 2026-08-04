@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: min(100%, 1160px);
+  width: min(100%, 1200px);
   margin: 0 auto 36px;
   padding: 24px 16px 36px;
 }
@@ -101,9 +101,28 @@
   min-height: 64px;
 }
 
+.loading-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.rotating {
+  animation: rotate 1.35s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .contenedor-imagenes {
   width: 100%;
-  margin-top: 18px;
+  
 }
 
 .converted-card {

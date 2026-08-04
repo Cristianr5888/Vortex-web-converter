@@ -1,4 +1,4 @@
-import v_logo from "../assets/vortex_fb-removebg-preview.png";
+import v_logo from "../assets/vortexLogoSE.png";
 import "../styles/Navbar.css";
 import i18n from "../i18n";
 import { useTranslation } from "react-i18next";
@@ -30,9 +30,7 @@ const Navbar = () => {
           <Button component={Link} to="/about" className="nav-button">
             {t("about")}
           </Button>
-          <Button component={Link} to="#" className="nav-button">
-            {t("png")}
-          </Button>
+          
         </Box>
 
         <Box className="nav-actions">
