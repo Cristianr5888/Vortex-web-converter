@@ -1,5 +1,5 @@
 import "../styles/Copy.css";
-import novaLogo from "../assets/novap.png";
+import novaLogo from "../assets/nova_purple.png";
 function CopyR() {
   return (
     <div>
